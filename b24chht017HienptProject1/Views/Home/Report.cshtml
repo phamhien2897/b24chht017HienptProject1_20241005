@@ -1,0 +1,230 @@
+﻿@using b24chht017HienptProject1.Models
+
+@{
+    List<Patient> listPatient = new List<Patient>();
+    listPatient =ViewBag.listPatient;
+}
+<div class="pcoded-content">
+    <div class="card">
+       
+        <div class="row">
+            <div class="col-lg-12 col-xl-12">
+                <div class="sub-title">Loại thống kê</div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs  tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#Cau1" role="tab">Câu 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#Cau2" role="tab">Câu 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#Cau3" role="tab">Câu 3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#Cau4" role="tab">Câu 4</a>
+                    </li>
+                </ul>
+              
+                <div class="tab-content tabs card-block">
+                    @* câu 1 *@
+                    <div class="tab-pane active" id="Cau1" role="tabpanel">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label>Từ ngày</label>
+                                    <input type="date" id="fromDateCau1" class="form-control" 
+                                           placeholder="Từ ngày">
+                                </div>
+                                <div class="col-sm-5">
+                                    <label>Đến ngày</label>
+                                    <input type="date" id="toDateCau1" class="form-control"
+                                           placeholder="Đến ngày">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <button class="btn btn-success btn-outline-success" style="margin-right:0px;height: 100%;" id="btsearch1">
+                                        <i class="ti-search"></i>Lọc
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="reportCau1">
+
+                        </div>
+                      
+                     
+                    </div>
+                    @* câu 2 *@
+                    <div class="tab-pane" id="Cau2" role="tabpanel">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label>Từ ngày</label>
+                                    <input type="date" id="fromDateCau2" class="form-control"
+                                           placeholder="Từ ngày">
+                                </div>
+                                <div class="col-sm-5">
+                                    <label>Đến ngày</label>
+                                    <input type="date" id="toDateCau2" class="form-control"
+                                           placeholder="Đến ngày">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <button class="btn btn-success btn-outline-success" style="margin-right:0px;height: 100%;" id="btsearch2">
+                                        <i class="ti-search"></i>Lọc
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="reportCau2">
+
+                        </div>
+                      
+                    </div>
+                    @* câu 3 *@
+                    <div class="tab-pane" id="Cau3" role="tabpanel">
+                        <div class="">
+                            <div class="row">
+                                <label class="col-sm-2 col-form-label">Bệnh nhân</label>
+                                <div class="col-sm-10">
+                                    <select name="select" id="txtBenhNhan" class="form-control">
+                                        @foreach (var item in listPatient)
+                                        {
+                                            <option value="@item.PatientID">@item.FullName - @item.CodePatient</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-success btn-outline-success" style="margin-right:0px;height: 100%;" id="btsearch3">
+                                    <i class="ti-search"></i>Lọc
+                                </button>
+                            </div>
+                        </div>
+                        <div id="reportCau3">
+
+                        </div>
+                        
+                    </div>
+                   
+                    <div class="tab-pane" id="Cau4" role="tabpanel">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label>Từ ngày</label>
+                                    <input type="date" class="form-control" id="fromDateCau4"
+                                           placeholder="Từ ngày">
+                                </div>
+                                <div class="col-sm-5">
+                                    <label>Đến ngày</label>
+                                    <input type="date" class="form-control" id="toDateCau4"
+                                           placeholder="Đến ngày">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <button class="btn btn-success btn-outline-success" style="margin-right:0px;height: 100%;" id="btsearch4">
+                                        <i class="ti-search"></i>Lọc
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                            <div id="reportCau4">
+                            </div>
+                
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $('.datepicker').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $('.datepicker').datepicker("setDate", new Date());
+
+
+    $("#btsearch1").on("click", function () {
+        var fromDate = $("#fromDateCau1").val();
+        var toDate = $("#toDateCau2").val();
+        $.ajax({
+            url: "/Home/Cau1",
+            dataType: "html",
+            type: "Get",
+            data: {
+                TuNgay: fromDate,
+                DenNgay: toDate
+            },
+            success: function (data) {
+                $("#reportCau1").html(data);
+            }, error: function (xhr, textStatus, errorThrown) {
+                Alert("Có lỗi xảy ra")
+            }
+        });
+    });
+
+    $("#btsearch2").on("click", function () {
+        var fromDate = $("#fromDateCau2").val();
+        var toDate = $("#toDateCau2").val();
+        $.ajax({
+            url: "/Home/Cau2",
+            dataType: "html",
+            type: "Get",
+            data: {
+                TuNgay: fromDate,
+                DenNgay: toDate
+            },
+            success: function (data) {
+                $("#reportCau2").html(data);
+            }, error: function (xhr, textStatus, errorThrown) {
+                Alert("Có lỗi xảy ra")
+            }
+        });
+    });
+
+    $("#btsearch3").on("click", function () {
+        var PatientID = $('#txtBenhNhan').find(":selected").val();
+        $.ajax({
+            url: "/Home/Cau3",
+            dataType: "html",
+            type: "Get",
+            data: {
+                PatientID: PatientID,
+            },
+            success: function (data) {
+                $("#reportCau3").html(data);
+            }, error: function (xhr, textStatus, errorThrown) {
+                Alert("Có lỗi xảy ra")
+            }
+        });
+    });
+
+    $("#btsearch4").on("click", function () {
+        var fromDate = $("#fromDateCau4").val();
+        var toDate = $("#toDateCau4").val();
+        $.ajax({
+            url: "/Home/Cau4",
+            dataType: "html",
+            type: "Get",
+            data: {
+                TuNgay: fromDate,
+                DenNgay: toDate
+            },
+            success: function (data) {
+                $("#reportCau4").html(data);
+            }, error: function (xhr, textStatus, errorThrown) {
+                Alert("Có lỗi xảy ra")
+            }
+        });
+    });
+
+
+</script>

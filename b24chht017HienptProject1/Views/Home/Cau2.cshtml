@@ -1,0 +1,27 @@
+﻿@using b24chht017HienptProject1.Models
+@model List<Cau2>
+
+<div>
+    <table class="table" style="margin-top:10px">
+        <thead>
+            <tr>
+                <th>Tên nhân viên</th>
+                <th>Chức vụ</th>
+                <th>Số lần</th>
+                <th>Bảng lương</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.TenNhanVien</td>
+                    <td>@item.ChucVu</td>
+                    <td>@item.solankham</td>
+                    <td>@item.BangLuong.ToString("###,##0.##")</td>
+                </tr>
+            }
+           
+        </tbody>
+    </table>
+</div>

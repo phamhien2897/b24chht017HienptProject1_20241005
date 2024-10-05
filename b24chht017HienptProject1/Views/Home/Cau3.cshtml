@@ -1,0 +1,29 @@
+﻿@using b24chht017HienptProject1.Models
+@model List<Cau3>
+
+<div>
+    <table class="table" style="margin-top:10px">
+        <thead>
+            <tr>
+                <th>Tên bệnh nhân</th>
+                <th>Tên bệnh</th>
+                <th>Ngày bắt đầu khám</th>
+                <th>Ngày khám</th>
+                <th>Tình trạng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.TenBenhNhan</td>
+                    <td>@item.TenBenh</td>
+                    <td>@item.NgayKhamLanDau.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
+                    <td>@item.NgayKham.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
+                    <td>@item.TinhTrangBenh</td>
+                </tr>
+            }
+           
+        </tbody>
+    </table>
+</div>

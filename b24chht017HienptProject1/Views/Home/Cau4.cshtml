@@ -1,0 +1,24 @@
+﻿
+@{
+    double dtKB = ViewBag.dtKB;
+    double dtBT = ViewBag.dtBT;
+}
+<div class="col-md-6 col-xl-3">
+    <div class="card widget-card-1">
+        <div class="card-block-small">
+            <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
+            <span class="text-c-blue f-w-600">Doanh thu khám bệnh</span>
+            <h4>@dtKB.ToString("###,##0.##")</h4>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-xl-3">
+    <div class="card widget-card-1">
+        <div class="card-block-small">
+            <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
+            <span class="text-c-blue f-w-600">Doanh thu thuốc</span>
+            <h4>@dtBT.ToString("###,##0.##")</h4>
+        </div>
+    </div>
+</div>
